@@ -6,11 +6,15 @@ Provides a server for IP- cameras. Highly configurable
  - uploads them to WEB using HTTP WEBDAV
  - Purges obsoletes local and remote files elder than x -days
  - controls motion detection dependend on presence of  IP- devices e.g. mobile phone. If you're at home, no pictures/videos are taken.
-     (This features is tested and working with "UPCAM"- webcams (upcam.de), but may simply be adapted to other cams by configuration.)
+     
  
+##Motion detection control:
+- If you're at home, do not take pictures and videos: Switch the cameras motion control ON or OFF depending on the presence of an IP- device (e.g. mobile phone) in W/LAN. (This features is tested and working with "UPCAM"- webcams (upcam.de), but may simply be adapted to other cams by configuration.)
+	- cron time expressions that define where motion MUST be ON regardless of a any device presence. e.g. at night when your're at home, but asleep - typically ;-)  
+
 Suitable for running on NAS or small systems (ODROID, Raspberry, ...) due to low ressource demand.
 
-May run as a system service. A service description file for Linux SYSTEMD is provided. In WINDOWS create a task manager. 
+May run as a system service. A service description file for Linux SYSTEMD is provided. In WINDOWS create a task in task manager. 
 
 # Getting started
 Download ipcamserver.jar, CameraServer.properties.
@@ -20,7 +24,8 @@ Optional download log4j.xml and edit the log files location inside. Set log leve
 Start the server with 'java -jar ipCamServer.jar'. 
 - Watch the proper operation
 - Watch the log files
- 
 
+If all is fine, send the program to background: 'java -jar ipCamServer.jar & '
+if all is still fine, install a system service using the provided service description file. 
 
 -- To be continued very soon --
