@@ -15,6 +15,12 @@ May run as a system service. A service description file for Linux SYSTEMD is pro
 # Getting started
 Download ipcamserver.jar, CameraServer.properties.
 Edit CameraServer.properties: The parameters are all obvious and lots of comments give explanation.
-Start the server with 'java -jar ipCamServer.jar' 
+Optional download log4j.xml and edit the log files location inside. Set log level in line <Logger name="com.gsi" level="debug">  from 'debug' to 'info'
 
--- To be continued --
+Start the server with 'java -jar ipCamServer.jar'. 
+- Watch the proper operation
+- Watch the log files
+ 
+
+
+-- To be continued very soon --
