@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+
+<!--  this log4jV1 is needed for QUARTZ scheduler. QUARTZ does not work with the compatibily layer 
+	of LOG4j V2 -> V1  -->
+
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/">
+
+	<appender name="console" class="org.apache.log4j.ConsoleAppender">
+		<param name="Target" value="System.Out" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%d{dd.MM.yyyy[HH:mm:ss]}[%p]:[%C{1}]-%m%n" />
+		</layout>
+	</appender>
+
+	<!-- only one line allowed. debug includes all others -->
+
+	<logger name="com.gsi">
+		<level value="debug" />
+	</logger>
+
+	<logger name="org.apache.ftpserver">
+		<level value="error" />
+	</logger>
+
+	<root>
+		<level value="info" />
+		<appender-ref ref="console" />
+	</root>
+
+</log4j:configuration>
+
