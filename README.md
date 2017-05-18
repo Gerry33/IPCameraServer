@@ -1,5 +1,5 @@
 # IPCameraServer
-Provides a server for IP- cameras. Suitable for running on NAS or small systems (ODROID, Raspberry, Banana PI,  ...) due to low ressource demand. 
+Provides a serverJAVA for IP- cameras. Suitable for running on NAS or small systems (ODROID, Raspberry, Banana PI,  ...) due to low ressource demand. 
 
 ## Features
  - Receives pictures, videos from any IP- camera (via FTP)
@@ -9,5 +9,10 @@ Provides a server for IP- cameras. Suitable for running on NAS or small systems 
  - controls motion detection dependend on presence of  IP- devices e.g. mobile phone. If you're at home, no pictures/videos are taken.
     
 It's a command line tool only that runs in the background of any system. Configuration is done by just editing one Properties-  text file. 
+
+## Prerequisites
+- a machine running 24/7 
+- JAVA SE 1.8
+- a little command line experience
 
 See WIKI for more details.
