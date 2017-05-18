@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- logging configuration file for log4j2 for CameraServer; by Gerd Sinne 
+	FAQ: http://logging.apache.org/log4j/2.x/faq.html -->
+<configuration>
+
+	<Properties>
+		<!-- this is quiet handy: its a kind of variable for reuse in the whole 
+			file. Here we reuse the pattern layout for all appenders. -->
+		<Property name="CommonLinePattern">%d{dd.MM.yyyy[HH:mm:ss]}[%p][%C{1}]-%m%n
+		</Property>
+		<Property name="baseDir">logs</Property>
+	</Properties>
+
+	<Appenders>
+		<Console name="STDOUT" target="SYSTEM_OUT">
+			<PatternLayout pattern="${CommonLinePattern}" />
+
+		</Console>
+
+		<!-- snippet: log4j2 simple file appender. not used here. <File name="wdsyncFile" 
+			fileName="WDsync.log" append="false"> <PatternLayout pattern="%d{dd.MM.yyyy[HH:mm:ss]}%C{1}[%p]-%m%n" 
+			/> </File> -->
+
+		<!-- snippet: log4j2 daily file appender http://logging.apache.org/log4j/2.0/manual/appenders.html -->
+
+		<RollingFile name="RollingFile" fileName="${baseDir}/CameraServer.log"
+			filePattern="${baseDir}/CameraServer.%d{yyyy-MM-dd}_%i.log">
+			<!-- the filename ending is started with matching the file name pattern 
+				from start here: 'CameraServer.log' is the common pattern, then ...%d{yyyy-MM-dd}_%i.log 
+				is added. Cool ! -->
+			<PatternLayout pattern="${CommonLinePattern}" />
+			<Policies>
+				<!-- change every day, determined by "... the most specific time unit 
+					in the date pattern". (http://logging.apache.org/log4j/2.x/manual/appenders.html#RollingFileAppender) 
+					Whatever that means ? likely the ...dd in filePattern above -->
+				<TimeBasedTriggeringPolicy interval="1" />
+				<SizeBasedTriggeringPolicy size="1 MB" />
+			</Policies>
+
+			<DefaultRolloverStrategy max="10">
+				<Delete basePath="${baseDir}" maxDepth="2">
+					<!-- also includes DB files -->
+					<IfFileName glob="*/*.log" />
+					<IfLastModified age="10d" />
+				</Delete>
+			</DefaultRolloverStrategy>
+
+		</RollingFile>
+	</Appenders>
+
+	<Loggers>
+
+		<!-- the compatibility layer between log4j1 and 2 takes over -->
+
+		<logger name="org.apache.ftpserver">
+			<level value="error" />
+			<AppenderRef ref="RollingFile" />
+		</logger>
+
+		<logger name="org.quartz.impl.StdSchedulerFactory" level="error">
+			<AppenderRef ref="STDOUT" />
+		</logger>
+
+		<Logger name="com.gsi" level="debug">
+			<!-- <AppenderRef ref="STDOUT" /> -->
+			<AppenderRef ref="RollingFile" />
+		</Logger>
+
+		<!-- <Root level="error"> dies auf debug ergibt auch logs für webdav <AppenderRef 
+			ref="STDOUT" /> <AppenderRef ref="RollingFile" /> </Root> -->
+
+		<Logger name="org.apache.log4j.xml" level="debug">
+			<AppenderRef ref="STDOUT" />
+			<AppenderRef ref="RollingFile" />
+		</Logger>
+
+	</Loggers>
+
+
+</configuration>
+
