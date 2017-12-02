@@ -6,7 +6,7 @@ Provides a JAVA server for IP- cameras. Suitable for running on NAS or small sys
  - converts them into any arbitrary format using ffmpeg (to be installed separately)
  - uploads them to WEB using HTTP WEBDAV
  - Purges obsoletes local and remote files elder than x -days to avoid overflows
- - controls motion detection dependend on presence of  IP- devices e.g. mobile phone. If you're at home, no pictures/videos are taken.
+ - controls motion detection dependend on presence of  IP- devices e.g. mobile phone: If you're at home, no pictures/videos are taken.
     
 It's a command line tool only that runs in the background of any system. Configuration is done by just editing one Properties-  text file. 
 
